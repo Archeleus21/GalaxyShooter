@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float playerMovementSpeed = 10f;
+    [SerializeField] public float playerMovementSpeed = 10f;
 
     Animator animator;
-    PlayerShoot playerShoot;
+    PlayerAbilities playerAbilities;
 
     // Use this for initialization
     void Start ()
     {
         transform.position = new Vector3(0, 0, 0);
         animator = GetComponent<Animator>();
-        playerShoot = GetComponent<PlayerShoot>() as PlayerShoot;
+        playerAbilities = GetComponent<PlayerAbilities>() as PlayerAbilities;
 	}
 	
 	// Update is called once per frame
@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //uses booleans to play animations
     void PlayerTurnAnimation(float Xmovement)
     {
         if(Xmovement < 0)
@@ -113,7 +114,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetButton("Fire1"))
         {
-            playerShoot.ShootLaserBeam();  //gets method/function from other script on same Game Object
+            playerAbilities.ShootLaserBeam();  //gets method/function from other script on same Game Object
         }
     }
 }

@@ -1,0 +1,12 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: PowerUpOverRideController
+  m_Controller: {fileID: 9100000, guid: cfc4b992da221f04e997422f36533c5e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 985856192c4e3054197d24ee6dc08e2d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3edf3f9d6e6dd4d42a130d6f2d824444, type: 2}
