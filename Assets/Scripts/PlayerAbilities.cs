@@ -10,20 +10,18 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] float fireRate = 1f;  //firespeed
     [SerializeField] float bulletSpeed = 5f;  //speed of bullet
 
-    float speedBoost = 2f;
+    float speedBoost = 1.5f;
     bool canTripleShot = false;
     bool canSpeedBoost = false;
 
     float timer;  //used for shooting speed
 
-    GameObject effectsHandler;
     Player player;
 
     // Use this for initialization
     void Start ()
     {
         player = GetComponent<Player>();
-        effectsHandler = GameObject.Find("Effects Handler");  //finds in heirarchy
 	}
 	
 	// Update is called once per frame
@@ -55,8 +53,7 @@ public class PlayerAbilities : MonoBehaviour
 
             timer = 0;
 
-            GameObject laserPrefabGO = Instantiate(laserPrefab, laserPosition, Quaternion.identity, effectsHandler.transform);
-            laserPrefabGO.GetComponent<Rigidbody>().AddForce(Vector3.up * bulletSpeed, ForceMode.Impulse);  //moves the laser
+            GameObject laserPrefabGO = Instantiate(laserPrefab, laserPosition, Quaternion.identity);
             Destroy(laserPrefabGO, .5f);
         }
     }
@@ -79,7 +76,7 @@ public class PlayerAbilities : MonoBehaviour
             Vector3 tripleShotPosition;
             tripleShotPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
-            GameObject tripleShotPrefabGO = Instantiate(tripleShotPrefab, tripleShotPosition, Quaternion.identity, effectsHandler.transform);
+            GameObject tripleShotPrefabGO = Instantiate(tripleShotPrefab, tripleShotPosition, Quaternion.identity);
             Destroy(tripleShotPrefabGO, .5f);
         }
     }

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float playerMovementSpeed = 10f;
-
     Animator animator;
     PlayerAbilities playerAbilities;
 
+    public int playerLives = 3;
+    public float playerMovementSpeed = 10f;
+    
     // Use this for initialization
     void Start ()
     {
@@ -115,6 +116,16 @@ public class Player : MonoBehaviour
         if(Input.GetButton("Fire1"))
         {
             playerAbilities.ShootLaserBeam();  //gets method/function from other script on same Game Object
+        }
+    }
+
+    public void TakeDamage()
+    {
+        playerLives--;
+
+        if(playerLives <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
