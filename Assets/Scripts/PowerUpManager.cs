@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    //[SerializeField] GameObject tripleShotPrefab;
-    //[SerializeField] GameObject speedBoostPrefab;
-
     GameObject powerUps;
     Animator animator;
 
-    public int powerUpID;  //tripleshot = 1, speedboost = 2, shield = 3
+    public int powerUpID;  //tripleshot = 0, speedboost = 1, shield = 2
 
     float timer;
 
@@ -37,20 +34,21 @@ public class PowerUpManager : MonoBehaviour
     {
         if (otherObj.name == "Player")
         {
-            PlayerAbilities playerShoot = otherObj.GetComponent<PlayerAbilities>();  //gets player script access
+            PlayerAbilities playerAbilities = otherObj.GetComponent<PlayerAbilities>();  //gets player script access
 
-            if (playerShoot != null)  //ensure player was the one that collided with object
+            if (playerAbilities != null)  //ensure player was the one that collided with object
             {
                 switch (powerUpID)
                 {
                     case 0:
-                        playerShoot.ActivateTripleShotPowerUp();
+                        playerAbilities.ActivateTripleShotPowerUp();
                         break;
                     case 1:
-                        playerShoot.ActivateSpeedBoostPowerUp();
+                        playerAbilities.ActivateSpeedBoostPowerUp();
                         break;
                     case 2:
-                        //playerShoot.ActivateShieldPowerUp();
+                        playerAbilities.isShieldActive = true;
+                        playerAbilities.ToggleShieldPowerUp();
                         break;
                     default:
                         print("no powerup ID found");

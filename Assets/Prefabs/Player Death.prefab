@@ -9,84 +9,75 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1025098968448800}
+  m_RootGameObject: {fileID: 1812510524433536}
   m_IsPrefabAsset: 1
---- !u!1 &1025098968448800
+--- !u!1 &1812510524433536
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4815970162213050}
-  - component: {fileID: 212679112698651318}
-  - component: {fileID: 61553139185356500}
-  - component: {fileID: 114279722236667596}
+  - component: {fileID: 4194363580311308}
+  - component: {fileID: 212526282005925148}
+  - component: {fileID: 95724441366265126}
+  - component: {fileID: 114565845192844580}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Player Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4815970162213050
+--- !u!4 &4194363580311308
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1025098968448800}
+  m_GameObject: {fileID: 1812510524433536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.04, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61553139185356500
-BoxCollider2D:
+--- !u!95 &95724441366265126
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1025098968448800}
+  m_GameObject: {fileID: 1812510524433536}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 5.12, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2.5}
-  m_EdgeRadius: 0
---- !u!114 &114279722236667596
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e20bcfca7ae4fc14fa1d62cc421924cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114565845192844580
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1025098968448800}
+  m_GameObject: {fileID: 1812510524433536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5cddda55e823664d8bf0d51e41e46c5, type: 3}
+  m_Script: {fileID: 11500000, guid: b9b2221fbda477e4dbcd0905223ea095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathExplosionPrefab: {fileID: 1507808973160076, guid: 5ddd3a9da504c4345b8a11eca555fc3a,
-    type: 2}
-  enemyMovementSpeed: 2
---- !u!212 &212679112698651318
+  deathFXIndex: 1
+--- !u!212 &212526282005925148
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1025098968448800}
+  m_GameObject: {fileID: 1812510524433536}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -116,7 +107,7 @@ SpriteRenderer:
   m_SortingLayerID: 806032873
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d67ba02a3ae743ed81501156742929f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

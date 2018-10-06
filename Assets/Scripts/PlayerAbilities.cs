@@ -6,28 +6,34 @@ public class PlayerAbilities : MonoBehaviour
 {
     [SerializeField] GameObject laserPrefab;  //bullet game object
     [SerializeField] GameObject tripleShotPrefab;  //bullet game object
+    [SerializeField] GameObject playerShieldPrefab;
+
 
     [SerializeField] float fireRate = 1f;  //firespeed
     [SerializeField] float bulletSpeed = 5f;  //speed of bullet
 
+    public bool isShieldActive = false;
+
     float speedBoost = 1.5f;
+    float timer;  //used for shooting speed
     bool canTripleShot = false;
     bool canSpeedBoost = false;
 
-    float timer;  //used for shooting speed
-
+    Animator animator;
     Player player;
-
+    
     // Use this for initialization
     void Start ()
     {
         player = GetComponent<Player>();
+        animator = gameObject.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         timer += Time.deltaTime;
+
 	}
 
 
@@ -94,6 +100,27 @@ public class PlayerAbilities : MonoBehaviour
         StartCoroutine(StartSpeedBoostTimeLimit());
     }
 
+    public bool GetIsShieldActive()
+    {
+         return isShieldActive;
+    }
+
+    public void ToggleShieldPowerUp()
+    {
+
+        if (GetIsShieldActive())
+        {
+            GameObject playerShieldGO = Instantiate(playerShieldPrefab, transform.position, Quaternion.identity, gameObject.transform);
+            playerShieldGO.GetComponent<Animator>().SetBool("Player Shield", true);
+        }
+        else
+        {
+            GameObject playerShieldGO = GameObject.Find("Player Shield(Clone)");
+            playerShieldGO.GetComponent<Animator>().SetBool("player Shield", false);
+            Destroy(playerShieldGO);
+        }
+    }
+
     public IEnumerator StartTripleShotTimeLimit()
     {
         yield return new WaitForSeconds(5f);
@@ -108,4 +135,5 @@ public class PlayerAbilities : MonoBehaviour
         player.playerMovementSpeed = 10f;
         print("end Speed powerup");
     }
+
 }

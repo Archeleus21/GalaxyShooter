@@ -37,7 +37,6 @@ public class EnemyBehavior : MonoBehaviour
         if (otherObj.name == "Laser(Clone)" || otherObj.name == "Triple Shot(Clone)")
         {
             CreateEnemyDeathExplosion();
-
             Destroy(otherObj.gameObject);
             Destroy(gameObject);
         }
@@ -47,13 +46,30 @@ public class EnemyBehavior : MonoBehaviour
 
             if(player != null)
             {
-                player.TakeDamage();
+                CheckForPlayerShield(player);
             }
+        }
+    }
+
+    private void CheckForPlayerShield(Player player)
+    {
+        if (player.GetComponent<PlayerAbilities>().GetIsShieldActive() == true)
+        {
+            player.GetComponent<PlayerAbilities>().isShieldActive = false;
+            player.GetComponent<PlayerAbilities>().ToggleShieldPowerUp();
+            CreateEnemyDeathExplosion();
+            Destroy(gameObject);
+        }
+        else
+        {
+            player.TakeDamage();
+            CreateEnemyDeathExplosion();
+            Destroy(gameObject);
         }
     }
 
     private void CreateEnemyDeathExplosion()
     {
-        deathExplosionPrefab.GetComponent<DeathFX>().DeathExplosionFX();
+        Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
     }
 }

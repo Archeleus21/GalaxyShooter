@@ -8,7 +8,7 @@ public class DeathFX : MonoBehaviour
     Animator animator;
     //GameObject explosionPrefab;
 
-    public int deathFXIndex;
+    public int deathFXIndex;  //0 = enemyDeath, 1 = playerDeath
 
 	// Use this for initialization
 	void Start ()
@@ -24,8 +24,20 @@ public class DeathFX : MonoBehaviour
 
     public void DeathExplosionFX()
     {
-        asdInstantiate(gameObject, transform.position, Quaternion.identity);
-        animator.SetTrigger("Enemy Death");
+
+        switch(deathFXIndex)
+        {
+            case 0:
+                animator.SetTrigger("Enemy Death");
+                break;
+            case 1:
+                animator.SetTrigger("Player Death");
+                break;
+            default:
+                print("No explosion");
+                break;
+        }
+        
         Destroy(gameObject, 2f);
     }
 }

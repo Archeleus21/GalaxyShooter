@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     Animator animator;
     PlayerAbilities playerAbilities;
 
+    [SerializeField] GameObject playerExplosionPrefab;
+
     public int playerLives = 3;
     public float playerMovementSpeed = 10f;
     
@@ -15,7 +17,7 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, 0);
         animator = GetComponent<Animator>();
-        playerAbilities = GetComponent<PlayerAbilities>() as PlayerAbilities;
+        playerAbilities = gameObject.GetComponent<PlayerAbilities>();
 	}
 	
 	// Update is called once per frame
@@ -125,7 +127,28 @@ public class Player : MonoBehaviour
 
         if(playerLives <= 0)
         {
+            PlayerDeath();
             Destroy(gameObject);
+        }
+    }
+
+    void PlayerDeath()
+    {
+        Instantiate(playerExplosionPrefab, transform.position, Quaternion.identity);
+    }
+
+    public void ShieldAnimation()
+    {
+        if(playerAbilities.GetIsShieldActive())
+        {
+           print("activate shield");
+            //animator.SetBool("Player Shield", true);
+        }
+        else
+        {
+
+            print("deactivate shield");
+           // animator.SetBool("Player Shield", false);
         }
     }
 }
