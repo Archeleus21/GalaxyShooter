@@ -48,7 +48,7 @@ public class PowerUpManager : MonoBehaviour
                         break;
                     case 2:
                         playerAbilities.isShieldActive = true;
-                        playerAbilities.ToggleShieldPowerUp();
+                        playerAbilities.ActivateShield();
                         break;
                     default:
                         print("no powerup ID found");

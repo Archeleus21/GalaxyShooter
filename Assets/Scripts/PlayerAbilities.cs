@@ -21,12 +21,14 @@ public class PlayerAbilities : MonoBehaviour
 
     Animator animator;
     Player player;
+    GameObject effectshandler;
     
     // Use this for initialization
     void Start ()
     {
         player = GetComponent<Player>();
         animator = gameObject.GetComponent<Animator>();
+        effectshandler = GameObject.Find("Effects Handler");
 	}
 	
 	// Update is called once per frame
@@ -59,7 +61,7 @@ public class PlayerAbilities : MonoBehaviour
 
             timer = 0;
 
-            GameObject laserPrefabGO = Instantiate(laserPrefab, laserPosition, Quaternion.identity);
+            GameObject laserPrefabGO = Instantiate(laserPrefab, laserPosition, Quaternion.identity, effectshandler.transform);
             Destroy(laserPrefabGO, .5f);
         }
     }
@@ -82,7 +84,7 @@ public class PlayerAbilities : MonoBehaviour
             Vector3 tripleShotPosition;
             tripleShotPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
-            GameObject tripleShotPrefabGO = Instantiate(tripleShotPrefab, tripleShotPosition, Quaternion.identity);
+            GameObject tripleShotPrefabGO = Instantiate(tripleShotPrefab, tripleShotPosition, Quaternion.identity, effectshandler.transform);
             Destroy(tripleShotPrefabGO, .5f);
         }
     }
@@ -97,27 +99,24 @@ public class PlayerAbilities : MonoBehaviour
     {
         canSpeedBoost = true;
         player.playerMovementSpeed = player.playerMovementSpeed * speedBoost;
+
+        if(player.playerMovementSpeed > 20f)
+        {
+            player.playerMovementSpeed = 20f;
+        }
+
         StartCoroutine(StartSpeedBoostTimeLimit());
     }
 
-    public bool GetIsShieldActive()
+    public void ActivateShield()
     {
-         return isShieldActive;
-    }
-
-    public void ToggleShieldPowerUp()
-    {
-
-        if (GetIsShieldActive())
+        if (isShieldActive == true)
         {
-            GameObject playerShieldGO = Instantiate(playerShieldPrefab, transform.position, Quaternion.identity, gameObject.transform);
-            playerShieldGO.GetComponent<Animator>().SetBool("Player Shield", true);
+            playerShieldPrefab.SetActive(true);
         }
         else
         {
-            GameObject playerShieldGO = GameObject.Find("Player Shield(Clone)");
-            playerShieldGO.GetComponent<Animator>().SetBool("player Shield", false);
-            Destroy(playerShieldGO);
+            playerShieldPrefab.SetActive(false);
         }
     }
 
@@ -125,7 +124,6 @@ public class PlayerAbilities : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         canTripleShot = false;
-        print("end Tripleshot powerup");
     }
 
     public IEnumerator StartSpeedBoostTimeLimit()
@@ -133,7 +131,6 @@ public class PlayerAbilities : MonoBehaviour
         yield return new WaitForSeconds(5f);
         canSpeedBoost = false;
         player.playerMovementSpeed = 10f;
-        print("end Speed powerup");
     }
 
 }

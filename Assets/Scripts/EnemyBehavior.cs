@@ -34,7 +34,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otherObj)
     {
-        if (otherObj.name == "Laser(Clone)" || otherObj.name == "Triple Shot(Clone)")
+        if (otherObj.name == "Laser(Clone)" || otherObj.name == "Triple Shot(Clone)" || otherObj.name == "Triple Shot")
         {
             CreateEnemyDeathExplosion();
             Destroy(otherObj.gameObject);
@@ -53,10 +53,10 @@ public class EnemyBehavior : MonoBehaviour
 
     private void CheckForPlayerShield(Player player)
     {
-        if (player.GetComponent<PlayerAbilities>().GetIsShieldActive() == true)
+        if (player.GetComponent<PlayerAbilities>().isShieldActive == true)
         {
             player.GetComponent<PlayerAbilities>().isShieldActive = false;
-            player.GetComponent<PlayerAbilities>().ToggleShieldPowerUp();
+            player.GetComponent<PlayerAbilities>().ActivateShield();
             CreateEnemyDeathExplosion();
             Destroy(gameObject);
         }

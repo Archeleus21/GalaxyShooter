@@ -6,7 +6,8 @@ public class Player : MonoBehaviour
 {
     Animator animator;
     PlayerAbilities playerAbilities;
-
+    UIManager uiManager;
+    
     [SerializeField] GameObject playerExplosionPrefab;
 
     public int playerLives = 3;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         animator = GetComponent<Animator>();
         playerAbilities = gameObject.GetComponent<PlayerAbilities>();
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 	}
 	
 	// Update is called once per frame
@@ -29,6 +31,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         PlayerShooting();
+
+        if(uiManager != null)
+        {
+            uiManager.RemainingPlayerLives(playerLives);
+        }
     }
 
     //used to control movement
@@ -124,6 +131,7 @@ public class Player : MonoBehaviour
     public void TakeDamage()
     {
         playerLives--;
+        uiManager.RemainingPlayerLives(playerLives);
 
         if(playerLives <= 0)
         {
@@ -135,20 +143,5 @@ public class Player : MonoBehaviour
     void PlayerDeath()
     {
         Instantiate(playerExplosionPrefab, transform.position, Quaternion.identity);
-    }
-
-    public void ShieldAnimation()
-    {
-        if(playerAbilities.GetIsShieldActive())
-        {
-           print("activate shield");
-            //animator.SetBool("Player Shield", true);
-        }
-        else
-        {
-
-            print("deactivate shield");
-           // animator.SetBool("Player Shield", false);
-        }
     }
 }

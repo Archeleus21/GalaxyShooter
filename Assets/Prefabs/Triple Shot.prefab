@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61511738458956784}
   - component: {fileID: 50553551394026266}
   m_Layer: 0
-  m_Name: Triple Shot (1)
+  m_Name: Triple Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 61430189841412140}
   - component: {fileID: 50726111272652876}
   m_Layer: 0
-  m_Name: Triple Shot (2)
+  m_Name: Triple Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathExplosionPrefab: {fileID: 1507808973160076, guid: 5ddd3a9da504c4345b8a11eca555fc3a,
     type: 2}
-  enemyMovementSpeed: 2
+  enemyMovementSpeed: 4
 --- !u!212 &212679112698651318
 SpriteRenderer:
   m_ObjectHideFlags: 1
