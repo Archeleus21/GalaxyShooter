@@ -7,19 +7,27 @@ public class Player : MonoBehaviour
     Animator animator;
     PlayerAbilities playerAbilities;
     UIManager uiManager;
+    MainMenu mainMenu;
+    SoundFXManager soundFX;
     
     [SerializeField] GameObject playerExplosionPrefab;
+    [SerializeField] GameObject leftEngineFire;
+    [SerializeField] GameObject rightEngineFire;
 
     public int playerLives = 3;
     public float playerMovementSpeed = 10f;
-    
+    public bool isPlayerDead;
+
     // Use this for initialization
     void Start ()
     {
         transform.position = new Vector3(0, 0, 0);
+
         animator = GetComponent<Animator>();
         playerAbilities = gameObject.GetComponent<PlayerAbilities>();
         uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        mainMenu = GameObject.Find("Canvas").GetComponentInChildren<MainMenu>();
+        soundFX = GameObject.Find("SoundFX Manager").GetComponent<SoundFXManager>();
 	}
 	
 	// Update is called once per frame
@@ -76,20 +84,19 @@ public class Player : MonoBehaviour
         if(Xmovement < 0)
         {
             animator.SetBool("Turn Left", true);
-        }
-        else if (Xmovement == 0)
-        {
-            animator.SetBool("Turn Left", false);
-        }
-
-        if(Xmovement > 0)
-        {
-            animator.SetBool("Turn Right", true);
-        }
-        else if (Xmovement == 0)
-        {
             animator.SetBool("Turn Right", false);
         }
+        else if (Xmovement > 0)
+        {
+            animator.SetBool("Turn Right", true);
+            animator.SetBool("Turn Left", false);
+        }
+        else
+        {
+            animator.SetBool("Turn Left", false);
+            animator.SetBool("Turn Right", false);
+        }
+
     }
    
     //keeps player on screen
@@ -132,16 +139,38 @@ public class Player : MonoBehaviour
     {
         playerLives--;
         uiManager.RemainingPlayerLives(playerLives);
+        DamageAnimation();
 
         if(playerLives <= 0)
         {
             PlayerDeath();
+            isPlayerDead = true;
+            mainMenu.isGameStarted = false;
+            mainMenu.RestartGame();
+            soundFX.ExplosionSound();
             Destroy(gameObject);
         }
     }
 
     void PlayerDeath()
     {
-        Instantiate(playerExplosionPrefab, transform.position, Quaternion.identity);
+        Instantiate(playerExplosionPrefab, transform.position, Quaternion.identity);  //explosion
+    }
+
+    void DamageAnimation()
+    {
+        if(playerLives == 2)
+        {
+            leftEngineFire.SetActive(true);
+        }
+        else if(playerLives == 1)
+        {
+            rightEngineFire.SetActive(true);
+        }
+        else
+        {
+            leftEngineFire.SetActive(false);
+            rightEngineFire.SetActive(false);
+        }
     }
 }

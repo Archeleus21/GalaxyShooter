@@ -9,8 +9,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text playerScore;
     [SerializeField] Sprite[] playerLivesImages;
 
+    public int score = 0;
+
+
+    private void Start()
+    {
+        ResetScore();
+    }
+
     //UpdateLives()
-   public void RemainingPlayerLives(int playerLives)
+    public void RemainingPlayerLives(int playerLives)
     {
         switch(playerLives)
         {
@@ -32,7 +40,15 @@ public class UIManager : MonoBehaviour
     //UpdateScore()
     public void PlayerScore()
     {
+        score += 10;
 
+        playerScore.text = score.ToString();
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        playerScore.text = score.ToString();
     }
 
 }

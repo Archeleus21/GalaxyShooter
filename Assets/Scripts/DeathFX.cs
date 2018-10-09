@@ -6,7 +6,6 @@ using UnityEngine;
 public class DeathFX : MonoBehaviour
 {
     Animator animator;
-    //GameObject explosionPrefab;
 
     public int deathFXIndex;  //0 = enemyDeath, 1 = playerDeath
 
@@ -14,10 +13,10 @@ public class DeathFX : MonoBehaviour
 	void Start ()
     {
         animator = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         DeathExplosionFX();
 	}

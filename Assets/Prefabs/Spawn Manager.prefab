@@ -56,3 +56,4 @@ MonoBehaviour:
   - {fileID: 1426720647807516, guid: 723c46c1ba75c3346b99971844b1841d, type: 2}
   - {fileID: 1602574749158466, guid: 450640c54e16e6440845d6f35d1140e7, type: 2}
   - {fileID: 1557960191729106, guid: bb77b06f39ad0274db04beaa3db73fc9, type: 2}
+  playerShip: {fileID: 1721342207573694, guid: e435a2292e56e5844b8c1d54f8de1b2a, type: 2}

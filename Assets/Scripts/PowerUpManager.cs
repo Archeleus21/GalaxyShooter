@@ -6,6 +6,7 @@ public class PowerUpManager : MonoBehaviour
 {
     GameObject powerUps;
     Animator animator;
+    SoundFXManager soundFX;
 
     public int powerUpID;  //tripleshot = 0, speedboost = 1, shield = 2
 
@@ -16,6 +17,7 @@ public class PowerUpManager : MonoBehaviour
     {
         powerUps = GetComponent<GameObject>();
         animator = GetComponent<Animator>();
+        soundFX = GameObject.Find("SoundFX Manager").GetComponent<SoundFXManager>();
     }
 
     // Update is called once per frame
@@ -32,12 +34,14 @@ public class PowerUpManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otherObj)
     {
-        if (otherObj.name == "Player")
+        if (otherObj.name == "Player(Clone)")
         {
             PlayerAbilities playerAbilities = otherObj.GetComponent<PlayerAbilities>();  //gets player script access
 
             if (playerAbilities != null)  //ensure player was the one that collided with object
             {
+                soundFX.PowerUpSound();
+
                 switch (powerUpID)
                 {
                     case 0:

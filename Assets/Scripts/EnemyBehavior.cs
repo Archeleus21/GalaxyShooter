@@ -7,10 +7,14 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] GameObject deathExplosionPrefab;
     [SerializeField] float enemyMovementSpeed = 2f;
 
+    UIManager uiManager;
+    SoundFXManager soundFX;
+
     // Use this for initialization
     void Start ()
     {
-        
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        soundFX = GameObject.Find("SoundFX Manager").GetComponent<SoundFXManager>();
     }
 	
 	// Update is called once per frame
@@ -36,11 +40,13 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (otherObj.name == "Laser(Clone)" || otherObj.name == "Triple Shot(Clone)" || otherObj.name == "Triple Shot")
         {
+            uiManager.PlayerScore();
             CreateEnemyDeathExplosion();
+            soundFX.ExplosionSound();
             Destroy(otherObj.gameObject);
             Destroy(gameObject);
         }
-        else if(otherObj.name == "Player")
+        else if(otherObj.name == "Player(Clone)")
         {
             Player player = otherObj.GetComponent<Player>();
 
@@ -57,13 +63,17 @@ public class EnemyBehavior : MonoBehaviour
         {
             player.GetComponent<PlayerAbilities>().isShieldActive = false;
             player.GetComponent<PlayerAbilities>().ActivateShield();
+            uiManager.PlayerScore();
             CreateEnemyDeathExplosion();
+            soundFX.ExplosionSound();
             Destroy(gameObject);
         }
         else
         {
+            uiManager.PlayerScore();
             player.TakeDamage();
             CreateEnemyDeathExplosion();
+            soundFX.ExplosionSound();
             Destroy(gameObject);
         }
     }

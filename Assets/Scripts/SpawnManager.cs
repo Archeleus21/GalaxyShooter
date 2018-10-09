@@ -5,16 +5,13 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject enemyShip;
+    [SerializeField] GameObject playerShip;
     [SerializeField] GameObject[] powerUps;
 
-    PlayerAbilities playerAbilities;
-
-    int playerLives;
+    Player player;
 
     float xRandom;
     float yRandom;
-
-    float powerUpSpawnRate;
 
 	// Use this for initialization
 	void Awake ()
@@ -25,17 +22,8 @@ public class SpawnManager : MonoBehaviour
 	// Update is called once per frame
 	void Start ()
     {
-        playerAbilities = GameObject.Find("Player").GetComponent<PlayerAbilities>();
-        playerLives = GameObject.Find("Player").GetComponent<Player>().playerLives;
 
-        if(playerLives > 0)
-        {
-            StartCoroutine(SpawnEnemies());
-            StartCoroutine(SpawnPowerUps());
-
-        }
-
-	}
+    }
 
     private void Update()
     {
@@ -44,37 +32,58 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        while (true)
+        while (player.isPlayerDead == false)
         {
             xRandom = Random.Range(-8f, 8f);
             yRandom = Random.Range(-4f, 4f);
 
             Instantiate(enemyShip, new Vector3(xRandom, 6f, 0f), Quaternion.identity, transform);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
+        }
+
+        foreach (Transform children in transform)
+        {
+            Destroy(children.gameObject);
         }
     }
 
     IEnumerator SpawnPowerUps()
     {
-        while (true)
+        while (player.isPlayerDead == false)
         {
             xRandom = Random.Range(-8f, 8f);
             yRandom = Random.Range(-4f, 4f);
+            int powerUpRandomIndex = Random.Range(0, 3);
 
             yield return new WaitForSeconds(6f);
-            Instantiate(powerUps[0], new Vector3(xRandom, yRandom, 0f), Quaternion.identity, transform);
-            yield return new WaitForSeconds(10f);
-            Instantiate(powerUps[1], new Vector3(xRandom, yRandom, 0f), Quaternion.identity, transform);
 
-            if (playerAbilities.isShieldActive == true)
+            if (player.isPlayerDead == true)
             {
-                //do nothing
+                yield break;
             }
             else
             {
-                Instantiate(powerUps[2], new Vector3(xRandom, yRandom, 0f), Quaternion.identity, transform);
-                yield return new WaitForSeconds(15f);
+                Instantiate(powerUps[powerUpRandomIndex], new Vector3(xRandom, yRandom, 0f), Quaternion.identity, transform);
+
             }
         }
+    }
+
+    public void StartGame()
+    {
+        Instantiate(playerShip, new Vector3(0f, 0f, 0f), Quaternion.identity);
+
+        player = GameObject.Find("Player(Clone)").GetComponent<Player>();
+        player.isPlayerDead = false;
+
+        StartCoroutine(StartSpawning());
+    }
+
+    IEnumerator StartSpawning()
+    {
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnPowerUps());
     }
 }

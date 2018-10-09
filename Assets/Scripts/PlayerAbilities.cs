@@ -22,6 +22,7 @@ public class PlayerAbilities : MonoBehaviour
     Animator animator;
     Player player;
     GameObject effectshandler;
+    SoundFXManager soundFX;
     
     // Use this for initialization
     void Start ()
@@ -29,6 +30,7 @@ public class PlayerAbilities : MonoBehaviour
         player = GetComponent<Player>();
         animator = gameObject.GetComponent<Animator>();
         effectshandler = GameObject.Find("Effects Handler");
+        soundFX = GameObject.Find("SoundFX Manager").GetComponent<SoundFXManager>();
 	}
 	
 	// Update is called once per frame
@@ -61,6 +63,7 @@ public class PlayerAbilities : MonoBehaviour
 
             timer = 0;
 
+            soundFX.PlayerShootSound();
             GameObject laserPrefabGO = Instantiate(laserPrefab, laserPosition, Quaternion.identity, effectshandler.transform);
             Destroy(laserPrefabGO, .5f);
         }
@@ -84,6 +87,7 @@ public class PlayerAbilities : MonoBehaviour
             Vector3 tripleShotPosition;
             tripleShotPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
+            soundFX.PlayerShootSound();
             GameObject tripleShotPrefabGO = Instantiate(tripleShotPrefab, tripleShotPosition, Quaternion.identity, effectshandler.transform);
             Destroy(tripleShotPrefabGO, .5f);
         }
