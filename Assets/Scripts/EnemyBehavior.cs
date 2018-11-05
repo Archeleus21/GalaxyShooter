@@ -16,9 +16,9 @@ public class EnemyBehavior : MonoBehaviour
         uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         soundFX = GameObject.Find("SoundFX Manager").GetComponent<SoundFXManager>();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         EnemyMovement();
 	}
@@ -40,13 +40,27 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (otherObj.name == "Laser(Clone)" || otherObj.name == "Triple Shot(Clone)" || otherObj.name == "Triple Shot")
         {
-            uiManager.PlayerScore();
+            Player player = otherObj.GetComponentInParent<Player>();
+
+            if(player.isPlayer_1 == true)
+            {
+                uiManager.Player_1Score();
+            }
+            if(player.isPlayer_2 == true)
+            {
+                uiManager.Player_2Score();
+            }
+            else
+            {
+                uiManager.PlayerScore();
+            }
+
             CreateEnemyDeathExplosion();
             soundFX.ExplosionSound();
             Destroy(otherObj.gameObject);
             Destroy(gameObject);
         }
-        else if(otherObj.name == "Player(Clone)")
+        else if(otherObj.name == "Player(Clone)" || otherObj.name == "Player_1(Clone)" || otherObj.name == "Player_2(Clone)")
         {
             Player player = otherObj.GetComponent<Player>();
 

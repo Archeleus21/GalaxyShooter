@@ -259,7 +259,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press Space Bar To Start!
+  m_Text: Press Enter To Start!
 --- !u!114 &114402451316947746
 MonoBehaviour:
   m_ObjectHideFlags: 1

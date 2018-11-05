@@ -34,7 +34,7 @@ public class PowerUpManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otherObj)
     {
-        if (otherObj.name == "Player(Clone)")
+        if (otherObj.name == "Player(Clone)" || otherObj.name == "Player_1(Clone)" || otherObj.name == "Player_2(Clone)")
         {
             PlayerAbilities playerAbilities = otherObj.GetComponent<PlayerAbilities>();  //gets player script access
 

@@ -37,7 +37,6 @@ public class PlayerAbilities : MonoBehaviour
 	void Update ()
     {
         timer += Time.deltaTime;
-
 	}
 
 
@@ -64,7 +63,7 @@ public class PlayerAbilities : MonoBehaviour
             timer = 0;
 
             soundFX.PlayerShootSound();
-            GameObject laserPrefabGO = Instantiate(laserPrefab, laserPosition, Quaternion.identity, effectshandler.transform);
+            GameObject laserPrefabGO = Instantiate(laserPrefab, laserPosition, Quaternion.identity, transform);
             Destroy(laserPrefabGO, .5f);
         }
     }
@@ -88,7 +87,7 @@ public class PlayerAbilities : MonoBehaviour
             tripleShotPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
             soundFX.PlayerShootSound();
-            GameObject tripleShotPrefabGO = Instantiate(tripleShotPrefab, tripleShotPosition, Quaternion.identity, effectshandler.transform);
+            GameObject tripleShotPrefabGO = Instantiate(tripleShotPrefab, tripleShotPosition, Quaternion.identity, transform);
             Destroy(tripleShotPrefabGO, .5f);
         }
     }

@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1890744479281246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5388769, y: 2.4937165, z: 0.023224475}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,8 +52,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyShip: {fileID: 1025098968448800, guid: e8a069bbe7366df459ef6d7f1eb2c2f9, type: 2}
+  playerShip: {fileID: 1721342207573694, guid: e435a2292e56e5844b8c1d54f8de1b2a, type: 2}
+  playerOneCoOp: {fileID: 1422994735172086, guid: 9caf8f5ab9016ec45b3540b9d34da1de,
+    type: 2}
+  playerTwoCoOp: {fileID: 1742950670325768, guid: 9567d4fa6fb73b3499be2438f7e26c8d,
+    type: 2}
   powerUps:
   - {fileID: 1426720647807516, guid: 723c46c1ba75c3346b99971844b1841d, type: 2}
   - {fileID: 1602574749158466, guid: 450640c54e16e6440845d6f35d1140e7, type: 2}
   - {fileID: 1557960191729106, guid: bb77b06f39ad0274db04beaa3db73fc9, type: 2}
-  playerShip: {fileID: 1721342207573694, guid: e435a2292e56e5844b8c1d54f8de1b2a, type: 2}
+  isCoOpMode: 0

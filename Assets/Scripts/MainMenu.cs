@@ -1,45 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] Canvas canvas;
-    [SerializeField] Image mainMenu;
+    Game_Manager gameManager;
 
-    SpawnManager spawnManager;
-    UIManager uiManager;
-
-    public bool isGameStarted = false;
-
-    // Use this for initialization
-    void Awake()
+    private void Start()
     {
 
-        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+    }
+    public void LoadSinglePlayerGame()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<Game_Manager>();
+        gameManager.isCoOpMode = false;
+        SceneManager.LoadScene("Single_Player");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadCoOpModeGame()
     {
-        RestartGame();
-    }
-
-    public void RestartGame()
-    {
-        if (isGameStarted == false )
-        {
-            mainMenu.gameObject.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isGameStarted = true;
-                mainMenu.gameObject.SetActive(false);
-                spawnManager.StartGame();
-                uiManager.ResetScore();
-            }
-        }
+        gameManager = GameObject.Find("GameManager").GetComponent<Game_Manager>();
+        gameManager.isCoOpMode = true;
+        SceneManager.LoadScene("Co-Op_Mode");
     }
 }
